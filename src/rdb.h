@@ -43,17 +43,29 @@
 /* Defines related to the dump file format. To store 32 bits lengths for short
  * keys requires a lot of space, so we check the most significant 2 bits of
  * the first byte to interpreter the length:
+ * 与转储文件格式相关的定义。
+ * 存储32位长度的短键需要大量的空间，
+ * 所以通过读取第一字节的最高 2 位来巧妙的判断长度：
  *
  * 00|XXXXXX => if the two MSB are 00 the len is the 6 bits of this byte
+ * 如果第一个字节的最高两位是 00 ，那接下来的6个bits表示长度
  * 01|XXXXXX XXXXXXXX =>  01, the len is 14 byes, 6 bits + 8 bits of next byte
+ * 如果第一个字节的最高两位是 01 ，那接下来的14(6+8)个bits表示长度
  * 10|000000 [32 bit integer] => A full 32 bit len in net byte order will follow
+ * 如果第一个字节的最高两位是 10，最低两位是 00，转化成16进制为0x80，那长度由后跟的 32 bits(4bytes)保存
  * 10|000001 [64 bit integer] => A full 64 bit len in net byte order will follow
+ * 如果第一个字节的最高两位是 10，最低两位是 01，转化成16进制为0x81，那长度由后跟的 64 bits(8bytes)保存
  * 11|OBKIND this means: specially encoded object will follow. The six bits
  *           number specify the kind of object that follows.
  *           See the RDB_ENC_* defines.
+ * 如果第一个字节的最高两位是 11，后面会跟一个特殊编码的对象。
+ * 字节中的 6 位指定对象的类型。查看 RDB_ENC_* 定义获得更多消息
  *
  * Lengths up to 63 are stored using a single byte, most DB keys, and may
- * values, will fit inside. */
+ * values, will fit inside. 
+ * 一个字节（其中的 6 个字节）可以保存的最大长度是 63 （包括在内），
+ * 对于大多数键和值来说，都已经足够了。
+ */
 #define RDB_6BITLEN 0
 #define RDB_14BITLEN 1
 #define RDB_32BITLEN 0x80
@@ -63,14 +75,20 @@
 
 /* When a length of a string object stored on disk has the first two bits
  * set, the remaining six bits specify a special encoding for the object
- * accordingly to the following defines: */
+ * accordingly to the following defines: 
+ * 当对象是一个字符串对象时，
+ * 最高两个位之后的其余6位指定了对象的特殊编码 
+ * (3版本的 RDBv6 是用后面的 2 位表示，也就是第 3 个位和第 4 个位)
+ * */
 #define RDB_ENC_INT8 0        /* 8 bit signed integer */
 #define RDB_ENC_INT16 1       /* 16 bit signed integer */
 #define RDB_ENC_INT32 2       /* 32 bit signed integer */
 #define RDB_ENC_LZF 3         /* string compressed with FASTLZ */
 
 /* Dup object types to RDB object types. Only reason is readability (are we
- * dealing with RDB types or with in-memory object types?). */
+ * dealing with RDB types or with in-memory object types?). 
+ * 对象类型在 RDB 文件中的类型
+ * */
 #define RDB_TYPE_STRING 0
 #define RDB_TYPE_LIST   1
 #define RDB_TYPE_SET    2
@@ -82,7 +100,9 @@
                                the generating module being loaded. */
 /* NOTE: WHEN ADDING NEW RDB TYPE, UPDATE rdbIsObjectType() BELOW */
 
-/* Object types for encoded objects. */
+/* Object types for encoded objects. 
+ * 对象的编码方式
+*/
 #define RDB_TYPE_HASH_ZIPMAP    9
 #define RDB_TYPE_LIST_ZIPLIST  10
 #define RDB_TYPE_SET_INTSET    11
@@ -91,10 +111,20 @@
 #define RDB_TYPE_LIST_QUICKLIST 14
 /* NOTE: WHEN ADDING NEW RDB TYPE, UPDATE rdbIsObjectType() BELOW */
 
-/* Test if a type is an object type. */
+/* Test if a type is an object type. 
+检查给定类型是否是对象类型
+*/
 #define rdbIsObjectType(t) ((t >= 0 && t <= 7) || (t >= 9 && t <= 14))
 
-/* Special RDB opcodes (saved/loaded with rdbSaveType/rdbLoadType). */
+/* Special RDB opcodes (saved/loaded with rdbSaveType/rdbLoadType). 
+数据库特殊操作标识符，也叫操作码
+RDB_OPCODE_AUX              0xFA	AUX	  辅助字段任意键值设置，也就是RDB文件前面的RDB文件相关的信息
+RDB_OPCODE_RESIZEDB         0xFB	RESIZEDB	主键空间的哈希表大小和到期时间
+RDB_OPCODE_EXPIRETIME_MS    0xFC	EXPIRETIMEMS	到期时间（以毫秒为单位）    
+RDB_OPCODE_EXPIRETIME       0xFD	EXPIRETIME	到期时间（以秒为单位）
+RDB_OPCODE_SELECTDB         0xFE	SELECTDB	数据库选择器 
+RDB_OPCODE_EOF              0xFF	EOF	RDB文件的结尾   
+*/
 #define RDB_OPCODE_AUX        250
 #define RDB_OPCODE_RESIZEDB   251
 #define RDB_OPCODE_EXPIRETIME_MS 252
@@ -102,7 +132,9 @@
 #define RDB_OPCODE_SELECTDB   254
 #define RDB_OPCODE_EOF        255
 
-/* Module serialized values sub opcodes */
+/* Module serialized values sub opcodes 
+模块序列化值子操作码
+*/
 #define RDB_MODULE_OPCODE_EOF   0   /* End of module value. */
 #define RDB_MODULE_OPCODE_SINT  1   /* Signed integer. */
 #define RDB_MODULE_OPCODE_UINT  2   /* Unsigned integer. */
