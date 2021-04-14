@@ -80,7 +80,10 @@ robj *createRawStringObject(const char *ptr, size_t len) {
 
 /* Create a string object with encoding OBJ_ENCODING_EMBSTR, that is
  * an object where the sds string is actually an unmodifiable string
- * allocated in the same chunk as the object itself. */
+ * allocated in the same chunk as the object itself.
+ * 创建一个编码为OBJ_ENCODING_EMBSTR的字符串对象，
+ * 在这个对象中，sds字符串实际上是一个不可修改的字符串，它分配在与对象本身相同的块中
+ *  */
 robj *createEmbeddedStringObject(const char *ptr, size_t len) {
     robj *o = zmalloc(sizeof(robj)+sizeof(struct sdshdr8)+len+1);
     struct sdshdr8 *sh = (void*)(o+1);
@@ -107,13 +110,21 @@ robj *createEmbeddedStringObject(const char *ptr, size_t len) {
     return o;
 }
 
+
+#define OBJ_ENCODING_EMBSTR_SIZE_LIMIT 44
 /* Create a string object with EMBSTR encoding if it is smaller than
  * OBJ_ENCODING_EMBSTR_SIZE_LIMIT, otherwise the RAW encoding is
  * used.
+ * 创建一个长度为 len ，值为 ptr 的字符串对象
+ * 
+ * 如果小于 OBJ_ENCODING_EMBSTR_SIZE_LIMIT 也就是 44bit，
+ * 则创建一个 EMBSTR 编码的字符串对象，否则创建 RAW 编码的字符串。
  *
  * The current limit of 39 is chosen so that the biggest string object
- * we allocate as EMBSTR will still fit into the 64 byte arena of jemalloc. */
-#define OBJ_ENCODING_EMBSTR_SIZE_LIMIT 44
+ * we allocate as EMBSTR will still fit into the 64 byte arena of jemalloc.
+ * 选择了当前的39(应该是44)个限制（3.2版本之后做了优化，以 44 为分界），
+ * 这样我们分配为EMBSTR的最大字符串对象仍然适合jemalloc的64字节区域
+ *  */
 robj *createStringObject(const char *ptr, size_t len) {
     if (len <= OBJ_ENCODING_EMBSTR_SIZE_LIMIT)
         return createEmbeddedStringObject(ptr,len);

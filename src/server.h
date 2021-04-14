@@ -525,7 +525,10 @@ typedef struct moduleValue {
 
 /* This is a wrapper for the 'rio' streams used inside rdb.c in Redis, so that
  * the user does not have to take the total count of the written bytes nor
- * to care about error conditions. */
+ * to care about error conditions.
+ * 这是Redis中rdb.c中使用的'rio'流的包装器，
+ * 这样用户就不必计算写入的字节总数，也不必关心错误情况
+ *  */
 typedef struct RedisModuleIO {
     size_t bytes;       /* Bytes read / written so far. */
     rio *rio;           /* Rio stream. */
@@ -839,21 +842,35 @@ struct redisMemOverhead {
 /* This structure can be optionally passed to RDB save/load functions in
  * order to implement additional functionalities, by storing and loading
  * metadata to the RDB file.
+ * 这个结构可以被选择性地传递给RDB save/load函数，
+ * 通过存储和加载元数据到RDB文件来实现额外的功能。
  *
  * Currently the only use is to select a DB at load time, useful in
  * replication in order to make sure that chained slaves (slaves of slaves)
  * select the correct DB and are able to accept the stream coming from the
- * top-level master. */
+ * top-level master. 
+ * 目前，唯一的用途是在加载时选择一个DB，这在复制中很有用，
+ * 因为可以确保链从(从库的从库)能选择正确的DB，并能够接受来自更高一级主库的数据流。
+ * */
 typedef struct rdbSaveInfo {
-    /* Used saving and loading. */
+    /* Used saving and loading. 
+     * 用在存储和加载RDB时
+     */
+    // 指定复制的 DB
     int repl_stream_db;  /* DB to select in server.master client. */
 
-    /* Used only loading. */
+    /* Used only loading. 
+     * 只用在加载 RDB 时
+     */
+    // 如果复制ID设置了的话就为 true
     int repl_id_is_set;  /* True if repl_id field is set. */
+    // 复制ID
     char repl_id[CONFIG_RUN_ID_SIZE+1];     /* Replication ID. */
+    // 复制偏移量
     long long repl_offset;                  /* Replication offset. */
 } rdbSaveInfo;
 
+// 复制的DB、是否设置复制ID、复制ID、复制偏移量
 #define RDB_SAVE_INFO_INIT {-1,0,"000000000000000000000000000000",-1}
 
 /*-----------------------------------------------------------------------------

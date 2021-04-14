@@ -44,7 +44,9 @@ uint32_t intrev32(uint32_t v);
 uint64_t intrev64(uint64_t v);
 
 /* variants of the function doing the actual convertion only if the target
- * host is big endian */
+ * host is big endian
+ * 仅当目标主机为大端时，才执行实际转换的函数变体
+ *  */
 #if (BYTE_ORDER == LITTLE_ENDIAN)
 #define memrev16ifbe(p)
 #define memrev32ifbe(p)

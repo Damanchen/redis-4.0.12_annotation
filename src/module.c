@@ -445,7 +445,8 @@ int RM_GetApi(const char *funcname, void **targetPtrPtr) {
     return REDISMODULE_OK;
 }
 
-/* Free the context after the user function was called. */
+/* Free the context after the user function was called.
+ * 在调用user函数后释放上下文 */
 void moduleFreeContext(RedisModuleCtx *ctx) {
     autoMemoryCollect(ctx);
     poolAllocRelease(ctx);
@@ -2786,11 +2787,15 @@ moduleType *moduleTypeLookupModuleByName(const char *name) {
     return NULL;
 }
 
-/* Lookup a module by ID, with caching. This function is used during RDB
- * loading. Modules exporting data types should never be able to unload, so
- * our cache does not need to expire. */
+
 #define MODULE_LOOKUP_CACHE_SIZE 3
 
+/* Lookup a module by ID, with caching. This function is used during RDB
+ * loading. Modules exporting data types should never be able to unload, so
+ * our cache does not need to expire.
+ * 使用缓存按ID查找模块。这个函数在RDB加载过程中使用。
+ * 导出数据等 类型 的模块永远不能卸载，因此我们的缓存不需要过期。
+ *  */
 moduleType *moduleTypeLookupModuleByID(uint64_t id) {
     static struct {
         uint64_t id;
@@ -2816,7 +2821,9 @@ moduleType *moduleTypeLookupModuleByID(uint64_t id) {
         while((ln = listNext(&li))) {
             moduleType *this_mt = ln->value;
             /* Compare only the 54 bit module identifier and not the
-             * encoding version. */
+             * encoding version.
+             * 只比较54位并且不是编码版本的模块标识符。
+             *  */
             if (this_mt->id >> 10 == id >> 10) {
                 mt = this_mt;
                 break;
@@ -2825,7 +2832,8 @@ moduleType *moduleTypeLookupModuleByID(uint64_t id) {
     }
     dictReleaseIterator(di);
 
-    /* Add to cache if possible. */
+    /* Add to cache if possible. 
+     * 如果满足条件，添加到缓存 */
     if (mt && j < MODULE_LOOKUP_CACHE_SIZE) {
         cache[j].id = id;
         cache[j].mt = mt;
@@ -2836,7 +2844,10 @@ moduleType *moduleTypeLookupModuleByID(uint64_t id) {
 /* Turn an (unresolved) module ID into a type name, to show the user an
  * error when RDB files contain module data we can't load.
  * The buffer pointed by 'name' must be 10 bytes at least. The function will
- * fill it with a null terminated module name. */
+ * fill it with a null terminated module name.
+ * 将一个(未解析的)模块ID转换为类型名，当RDB文件包含我们无法加载的模块数据时，向用户显示一个错误。
+ * 'name'所指向的缓冲区必须至少为10个字节。该函数将用一个以null结尾的模块名填充它。
+ *  */
 void moduleTypeNameByID(char *name, uint64_t moduleid) {
     const char *cset = ModuleTypeNameCharSet;
 
@@ -2852,13 +2863,21 @@ void moduleTypeNameByID(char *name, uint64_t moduleid) {
 /* Register a new data type exported by the module. The parameters are the
  * following. Please for in depth documentation check the modules API
  * documentation, especially the TYPES.md file.
- *
+ * 注册模块导出的新数据类型。
+ * 参数说明如下。请查看模块API的详细文档，特别是 TYPES.md 文件
+ * 
  * * **name**: A 9 characters data type name that MUST be unique in the Redis
  *   Modules ecosystem. Be creative... and there will be no collisions. Use
  *   the charset A-Z a-z 9-0, plus the two "-_" characters. A good
  *   idea is to use, for example `<typename>-<vendor>`. For example
  *   "tree-AntZ" may mean "Tree data structure by @antirez". To use both
  *   lower case and upper case letters helps in order to prevent collisions.
+ *   9个字符的数据类型名称，在Redis模块生态系统中必须是唯一的。
+ *   名字取得有创意一些，就不会有碰撞。使用字符集A-Z a-z 9-0，加上两个“-_”字符。
+ *   例如' <typename>-<vendor> '这样就是一个好主意。
+ *   例如，“tree-AntZ”可能意味着“@antirez的树数据结构”。
+ *   同时使用小写和大写字母有助于防止碰撞。
+ * 
  * * **encver**: Encoding version, which is, the version of the serialization
  *   that a module used in order to persist data. As long as the "name"
  *   matches, the RDB loading will be dispatched to the type callbacks
@@ -2870,9 +2889,20 @@ void moduleTypeNameByID(char *name, uint64_t moduleid) {
  *   still load old data produced by an older version if the rdb_load
  *   callback is able to check the encver value and act accordingly.
  *   The encver must be a positive value between 0 and 1023.
+ *   编码版本，也就是模块用来持久化数据的序列化版本。
+ *   只要"name"匹配，RDB的加载将被分派给类型回调函数，无论使用的是什么'encver'，
+ *   但是模块可以理解它必须加载的编码是否是该模块的旧版本。
+ *   例如，模块"tree-AntZ"最初使用的是encver=0。
+ *   升级之后，它开始以不同的格式序列化数据，并向encver=1注册该类型。
+ *   但是，如果rdb_load回调函数能够检查encver的值并采取相应的行动，
+ *   那么这个模块仍然可以加载旧版本产生的旧数据。
+ *   encver必须为0 ~ 1023之间的正值。
+ * 
  * * **typemethods_ptr** is a pointer to a RedisModuleTypeMethods structure
  *   that should be populated with the methods callbacks and structure
  *   version, like in the following example:
+ *   一个指向redismoduletypememethods结构的指针，
+ *   该结构应该用方法回调和结构版本填充，如下面的例子所示:
  *
  *      RedisModuleTypeMethods tm = {
  *          .version = REDISMODULE_TYPE_METHOD_VERSION,
@@ -2894,9 +2924,11 @@ void moduleTypeNameByID(char *name, uint64_t moduleid) {
  *
  * The **digest* and **mem_usage** methods should currently be omitted since
  * they are not yet implemented inside the Redis modules core.
+ * digest 和 mem_usage 方法目前应该被省略，因为它们还没有在Redis模块核心中实现。
  *
  * Note: the module name "AAAAAAAAA" is reserved and produces an error, it
  * happens to be pretty lame as well.
+ * 注意:模块名"AAAAAAAAA"是保留的，并产生错误，它碰巧也相当蹩脚。
  *
  * If there is already a module registering a type with the same name,
  * and if the module name or encver is invalid, NULL is returned.
@@ -2904,8 +2936,13 @@ void moduleTypeNameByID(char *name, uint64_t moduleid) {
  * type RedisModuleType is returned: the caller of the function should store
  * this reference into a gobal variable to make future use of it in the
  * modules type API, since a single module may register multiple types.
+ * 如果已经有一个模块注册了一个具有相同名称的类型，并且模块名或encver无效，则返回NULL。
+ * 否则，新的类型会注册到Redis中，并且返回一个RedisModuleType类型的引用:
+ * 函数的调用者应该将这个引用存储到一个全局变量中，以便将来在模块类型API中使用它，
+ * 因为一个模块可能会注册多个类型。
+ * 
  * Example code fragment:
- *
+ * 
  *      static RedisModuleType *BalancedTreeType;
  *
  *      int RedisModule_OnLoad(RedisModuleCtx *ctx) {
