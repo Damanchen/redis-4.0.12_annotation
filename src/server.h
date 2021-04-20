@@ -490,7 +490,9 @@ typedef size_t (*moduleTypeMemUsageFunc)(const void *value);
 typedef void (*moduleTypeFreeFunc)(void *value);
 
 /* The module type, which is referenced in each value of a given type, defines
- * the methods and links to the module exporting the type. */
+ * the methods and links to the module exporting the type.
+ * 在给定类型的 每个值中引用的模块类型 定义了导出该类型的模块的方法和链接。
+ *  */
 typedef struct RedisModuleType {
     uint64_t id; /* Higher 54 bits of type ID + 10 lower bits of encoding ver. */
     struct RedisModule *module;
