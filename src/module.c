@@ -891,7 +891,10 @@ void RM_RetainString(RedisModuleCtx *ctx, RedisModuleString *str) {
 
 /* Given a string module object, this function returns the string pointer
  * and length of the string. The returned pointer and length should only
- * be used for read only accesses and never modified. */
+ * be used for read only accesses and never modified.
+ * 给定一个字符串模块对象，此函数返回字符串指针和字符串长度。
+ * 返回的指针和长度只能用于只读访问，不能修改。
+ *  */
 const char *RM_StringPtrLen(const RedisModuleString *str, size_t *len) {
     if (str == NULL) {
         const char *errmsg = "(NULL string reply referenced in module)";
@@ -907,6 +910,8 @@ const char *RM_StringPtrLen(const RedisModuleString *str, size_t *len) {
  * ------------------------------------------------------------------------- */
 
 /* Convert the string into a long long integer, storing it at `*ll`.
+ * 将字符串转换为一个长整数，并存储在 '*ll'
+ * 
  * Returns REDISMODULE_OK on success. If the string can't be parsed
  * as a valid, strict long long (no spaces before/after), REDISMODULE_ERR
  * is returned. */
@@ -976,7 +981,8 @@ int RM_StringAppendBuffer(RedisModuleCtx *ctx, RedisModuleString *str, const cha
 
 /* Send an error about the number of arguments given to the command,
  * citing the command name in the error message.
- *
+ * 返回参数错误
+ * 
  * Example:
  *
  *     if (argc != 3) return RedisModule_WrongArity(ctx);
@@ -1061,12 +1067,17 @@ int RM_ReplyWithSimpleString(RedisModuleCtx *ctx, const char *msg) {
 /* Reply with an array type of 'len' elements. However 'len' other calls
  * to `ReplyWith*` style functions must follow in order to emit the elements
  * of the array.
+ * 使用'len'元素的数组类型进行应答。
+ * 但是'len'对 'ReplyWith*'样式函数的其他调用必须紧随其后才能发出数组的元素。
  *
  * When producing arrays with a number of element that is not known beforehand
  * the function can be called with the special count
  * REDISMODULE_POSTPONED_ARRAY_LEN, and the actual number of elements can be
  * later set with RedisModule_ReplySetArrayLength() (which will set the
  * latest "open" count if there are multiple ones).
+ * 当生产数组的元素不是预先知道特殊的函数可以调用计数
+ * REDISMODULE_POSTPONED_ARRAY_LEN,和实际的元素数量可以与
+ * RedisModule_ReplySetArrayLength后设置()(它将最新的“开放”数如果有多个的)。
  *
  * The function always returns REDISMODULE_OK. */
 int RM_ReplyWithArray(RedisModuleCtx *ctx, long len) {
@@ -1386,9 +1397,11 @@ int RM_SelectDb(RedisModuleCtx *ctx, int newid) {
 /* Return an handle representing a Redis key, so that it is possible
  * to call other APIs with the key handle as argument to perform
  * operations on the key.
+ * 返回一个代表Redis键的句柄，这样就可以调用其他api以键柄作为参数来执行对键的操作
  *
  * The return value is the handle repesenting the key, that must be
  * closed with RM_CloseKey().
+ * 返回值是表示键的句柄，必须用RM_CloseKey()关闭。
  *
  * If the key does not exist and WRITE mode is requested, the handle
  * is still returned, since it is possible to perform operations on
@@ -1396,7 +1409,12 @@ int RM_SelectDb(RedisModuleCtx *ctx, int newid) {
  * a list push operation). If the mode is just READ instead, and the
  * key does not exist, NULL is returned. However it is still safe to
  * call RedisModule_CloseKey() and RedisModule_KeyType() on a NULL
- * value. */
+ * value.
+ * 如果键不存在且请求了WRITE模式，仍然返回句柄，因为可以对不存在的键执行操作
+ * (例如，将在列表push操作之后创建)。
+ * 如果模式只是READ，而键不存在，则返回NULL。
+ * 但是，在NULL值上调用RedisModule_CloseKey()和RedisModule_KeyType()仍然是安全的。
+ *  */
 void *RM_OpenKey(RedisModuleCtx *ctx, robj *keyname, int mode) {
     RedisModuleKey *kp;
     robj *value;
@@ -2872,6 +2890,7 @@ void moduleTypeNameByID(char *name, uint64_t moduleid) {
  *   idea is to use, for example `<typename>-<vendor>`. For example
  *   "tree-AntZ" may mean "Tree data structure by @antirez". To use both
  *   lower case and upper case letters helps in order to prevent collisions.
+ *   
  *   9个字符的数据类型名称，在Redis模块生态系统中必须是唯一的。
  *   名字取得有创意一些，就不会有碰撞。使用字符集A-Z a-z 9-0，加上两个“-_”字符。
  *   例如' <typename>-<vendor> '这样就是一个好主意。
@@ -2889,6 +2908,7 @@ void moduleTypeNameByID(char *name, uint64_t moduleid) {
  *   still load old data produced by an older version if the rdb_load
  *   callback is able to check the encver value and act accordingly.
  *   The encver must be a positive value between 0 and 1023.
+ * 
  *   编码版本，也就是模块用来持久化数据的序列化版本。
  *   只要"name"匹配，RDB的加载将被分派给类型回调函数，无论使用的是什么'encver'，
  *   但是模块可以理解它必须加载的编码是否是该模块的旧版本。
@@ -2896,12 +2916,13 @@ void moduleTypeNameByID(char *name, uint64_t moduleid) {
  *   升级之后，它开始以不同的格式序列化数据，并向encver=1注册该类型。
  *   但是，如果rdb_load回调函数能够检查encver的值并采取相应的行动，
  *   那么这个模块仍然可以加载旧版本产生的旧数据。
- *   encver必须为0 ~ 1023之间的正值。
+ *   encver必须为 0 ~ 1023 之间的正值。
  * 
  * * **typemethods_ptr** is a pointer to a RedisModuleTypeMethods structure
  *   that should be populated with the methods callbacks and structure
  *   version, like in the following example:
- *   一个指向redismoduletypememethods结构的指针，
+ * 
+ *   一个指向 redismoduletypememethods 结构的指针，
  *   该结构应该用方法回调和结构版本填充，如下面的例子所示:
  *
  *      RedisModuleTypeMethods tm = {
@@ -2924,6 +2945,7 @@ void moduleTypeNameByID(char *name, uint64_t moduleid) {
  *
  * The **digest* and **mem_usage** methods should currently be omitted since
  * they are not yet implemented inside the Redis modules core.
+ * 
  * digest 和 mem_usage 方法目前应该被省略，因为它们还没有在Redis模块核心中实现。
  *
  * Note: the module name "AAAAAAAAA" is reserved and produces an error, it
@@ -2936,8 +2958,9 @@ void moduleTypeNameByID(char *name, uint64_t moduleid) {
  * type RedisModuleType is returned: the caller of the function should store
  * this reference into a gobal variable to make future use of it in the
  * modules type API, since a single module may register multiple types.
+ * 
  * 如果已经有一个模块注册了一个具有相同名称的类型，并且模块名或encver无效，则返回NULL。
- * 否则，新的类型会注册到Redis中，并且返回一个RedisModuleType类型的引用:
+ * 否则，新的类型会注册到Redis中，并且返回一个 RedisModuleType 类型的引用:
  * 函数的调用者应该将这个引用存储到一个全局变量中，以便将来在模块类型API中使用它，
  * 因为一个模块可能会注册多个类型。
  * 
@@ -2951,6 +2974,7 @@ void moduleTypeNameByID(char *name, uint64_t moduleid) {
  *      }
  */
 moduleType *RM_CreateDataType(RedisModuleCtx *ctx, const char *name, int encver, void *typemethods_ptr) {
+    // Higher 54 bits of type ID + 10 lower bits of encoding ver.
     uint64_t id = moduleTypeEncodeId(name,encver);
     if (id == 0) return NULL;
     if (moduleTypeLookupModuleByName(name) != NULL) return NULL;
@@ -2998,9 +3022,12 @@ int RM_ModuleTypeSetValue(RedisModuleKey *key, moduleType *mt, void *value) {
 
 /* Assuming RedisModule_KeyType() returned REDISMODULE_KEYTYPE_MODULE on
  * the key, returns the moduel type pointer of the value stored at key.
- *
+ * key的类型为 REDISMODULE_KEYTYPE_MODULE，则返回存储在键上的值的moduel类型指针。
+ * 
  * If the key is NULL, is not associated with a module type, or is empty,
- * then NULL is returned instead. */
+ * then NULL is returned instead.
+ * 如果键值为NULL，与模块类型没有关联，或者为空，则返回NULL。
+ *  */
 moduleType *RM_ModuleTypeGetType(RedisModuleKey *key) {
     if (key == NULL ||
         key->value == NULL ||
@@ -3012,7 +3039,9 @@ moduleType *RM_ModuleTypeGetType(RedisModuleKey *key) {
 /* Assuming RedisModule_KeyType() returned REDISMODULE_KEYTYPE_MODULE on
  * the key, returns the module type low-level value stored at key, as
  * it was set by the user via RedisModule_ModuleTypeSet().
- *
+ * key的类型为 REDISMODULE_KEYTYPE_MODULE，则返回存储在key的模块类型低级值，
+ * 它是由用户通过 RedisModule_ModuleTypeSet()设置的。
+ * 
  * If the key is NULL, is not associated with a module type, or is empty,
  * then NULL is returned instead. */
 void *RM_ModuleTypeGetValue(RedisModuleKey *key) {
@@ -3061,10 +3090,14 @@ saveerr:
 
 /* Load an unsigned 64 bit value from the RDB file. This function should only
  * be called in the context of the rdb_load method of modules implementing
- * new data types. */
+ * new data types.
+ * 从RDB文件中加载一个无符号的64位值。这个函数应该只在实现新数据类型的模块的rdb_load方法的上下文中调用。
+ *  */
 uint64_t RM_LoadUnsigned(RedisModuleIO *io) {
+    // module 2 版本
     if (io->ver == 2) {
         uint64_t opcode = rdbLoadLen(io->rio,NULL);
+        // 如果操作码不是 UINT 类型 的，就跳到错误处理
         if (opcode != RDB_MODULE_OPCODE_UINT) goto loaderr;
     }
     uint64_t value;
@@ -3084,8 +3117,11 @@ void RM_SaveSigned(RedisModuleIO *io, int64_t value) {
     RM_SaveUnsigned(io,conv.u);
 }
 
-/* Like RedisModule_LoadUnsigned() but for signed 64 bit values. */
+/* Like RedisModule_LoadUnsigned() but for signed 64 bit values.
+ * 类似于加载无符号的数据，但是因为巧妙的使用了共同体做了处理，所以返回的是有符号的数据
+ */
 int64_t RM_LoadSigned(RedisModuleIO *io) {
+    // u 和 i 同为 conv 的共同体，使用的是同一块内存地址，数据会相互影响
     union {uint64_t u; int64_t i;} conv;
     conv.u = RM_LoadUnsigned(io);
     return conv.i;
@@ -3874,12 +3910,14 @@ int moduleRegisterApi(const char *funcname, void *funcptr) {
     return dictAdd(server.moduleapi, (char*)funcname, funcptr);
 }
 
+// 宏REGISTER_API定义，实际上就是把函数的地址和api名称（名称统一添加RedisModule_前缀）以kv的形式添加到server.moduleapi字典中
 #define REGISTER_API(name) \
     moduleRegisterApi("RedisModule_" #name, (void *)(unsigned long)RM_ ## name)
 
 /* Global initialization at Redis startup. */
 void moduleRegisterCoreAPI(void);
 
+// 初始化模块环境并注册api
 void moduleInitModulesSystem(void) {
     moduleUnblockedClients = listCreate();
     server.loadmodule_queue = listCreate();
@@ -3963,10 +4001,14 @@ void moduleUnregisterCommands(struct RedisModule *module) {
 }
 
 /* Load a module and initialize it. On success C_OK is returned, otherwise
- * C_ERR is returned. */
+ * C_ERR is returned.
+ * 加载配置文件的模块，并初始化
+ * */
 int moduleLoad(const char *path, void **module_argv, int module_argc) {
     int (*onload)(void *, void **, int);
     void *handle;
+
+    // module 上下文
     RedisModuleCtx ctx = REDISMODULE_CTX_INIT;
 
     handle = dlopen(path,RTLD_NOW|RTLD_LOCAL);
@@ -3974,6 +4016,8 @@ int moduleLoad(const char *path, void **module_argv, int module_argc) {
         serverLog(LL_WARNING, "Module %s failed to load: %s", path, dlerror());
         return C_ERR;
     }
+
+    // onload 指向模块中RedisModule_OnLoad函数，因此每个模块都必须实现该函数
     onload = (int (*)(void *, void **, int))(unsigned long) dlsym(handle,"RedisModule_OnLoad");
     if (onload == NULL) {
         serverLog(LL_WARNING,
@@ -3981,6 +4025,8 @@ int moduleLoad(const char *path, void **module_argv, int module_argc) {
             "symbol. Module not loaded.",path);
         return C_ERR;
     }
+
+    // 执行RedisModule_OnLoad函数
     if (onload((void*)&ctx,module_argv,module_argc) == REDISMODULE_ERR) {
         if (ctx.module) {
             moduleUnregisterCommands(ctx.module);
@@ -3993,6 +4039,7 @@ int moduleLoad(const char *path, void **module_argv, int module_argc) {
     }
 
     /* Redis module loaded! Register it. */
+    // 初始化好的模块上下文添加到modules字典中
     dictAdd(modules,ctx.module->name,ctx.module);
     ctx.module->handle = handle;
     serverLog(LL_NOTICE,"Module '%s' loaded from %s",ctx.module->name,path);
@@ -4108,7 +4155,9 @@ size_t moduleCount(void) {
 }
 
 /* Register all the APIs we export. Keep this function at the end of the
- * file so that's easy to seek it to add new entries. */
+ * file so that's easy to seek it to add new entries.
+ * 注册模块api，调用宏REGISTER_API注册api
+ * */
 void moduleRegisterCoreAPI(void) {
     server.moduleapi = dictCreate(&moduleAPIDictType,NULL);
     REGISTER_API(Alloc);

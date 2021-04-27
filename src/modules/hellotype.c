@@ -4,6 +4,12 @@
  * at the same time, extremely simple to understand, to show how the API
  * works, how a new data type is created, and how to write basic methods
  * for RDB loading, saving and AOF rewriting.
+ * 
+ * 这个文件实现了一个名为“HELLOTYPE”的新的模块原生数据类型。
+ * 实现的数据结构是一个非常简单的命令链表的64位整数,
+ * 为了在保证数据的真实性的同时，又要做到容易理解。
+ * 这个文件说明了API是如何工作的,一个新的数据类型是如何创建的,
+ * 以及如何编写基本方法来进行RDB的加载、保存和AOF重写。
  *
  * -----------------------------------------------------------------------------
  *
@@ -48,7 +54,10 @@ static RedisModuleType *HelloType;
  * This is just a linked list of 64 bit integers where elements are inserted
  * in-place, so it's ordered. There is no pop/push operation but just insert
  * because it is enough to show the implementation of new data types without
- * making things complex. */
+ * making things complex.
+ * 这只是一个由64位整数组成的链表，其中的元素是在适当位置插入的，因此它是有序的。
+ * 这里没有pop/push操作，只有insert操作，因为它足以展示新数据类型的实现，而又不会使事情变得复杂。
+ *  */
 
 struct HelloTypeNode {
     int64_t value;
@@ -60,14 +69,17 @@ struct HelloTypeObject {
     size_t len; /* Number of elements added. */
 };
 
+// 创建一个空链表
 struct HelloTypeObject *createHelloTypeObject(void) {
     struct HelloTypeObject *o;
+    // RedisModule_Alloc 申请内存
     o = RedisModule_Alloc(sizeof(*o));
     o->head = NULL;
     o->len = 0;
     return o;
 }
 
+// 向链表中插入 ele
 void HelloTypeInsert(struct HelloTypeObject *o, int64_t ele) {
     struct HelloTypeNode *next = o->head, *newnode, *prev = NULL;
 
@@ -249,11 +261,15 @@ void HelloTypeDigest(RedisModuleDigest *md, void *value) {
 }
 
 /* This function must be present on each Redis module. It is used in order to
- * register the commands into the Redis server. */
+ * register the commands into the Redis server.
+ * 模块入口，每个模块必须实现该函数。
+ * 调用RedisModule_Init注册模块，调用RedisModule_CreateCommand注册命令
+  */
 int RedisModule_OnLoad(RedisModuleCtx *ctx, RedisModuleString **argv, int argc) {
     REDISMODULE_NOT_USED(argv);
     REDISMODULE_NOT_USED(argc);
 
+    // 初始化 hellotype 模块，hellotype 是模块名称 和文件名没关系，想定义什么定义什么。但最好和模块同名。
     if (RedisModule_Init(ctx,"hellotype",1,REDISMODULE_APIVER_1)
         == REDISMODULE_ERR) return REDISMODULE_ERR;
 
@@ -267,17 +283,21 @@ int RedisModule_OnLoad(RedisModuleCtx *ctx, RedisModuleString **argv, int argc) 
         .digest = HelloTypeDigest
     };
 
+    // 注册 hellotype 数据持久化相关的处理逻辑
     HelloType = RedisModule_CreateDataType(ctx,"hellotype",0,&tm);
     if (HelloType == NULL) return REDISMODULE_ERR;
 
+    // 注册 hellotype.insert 命令对应的处理逻辑
     if (RedisModule_CreateCommand(ctx,"hellotype.insert",
         HelloTypeInsert_RedisCommand,"write deny-oom",1,1,1) == REDISMODULE_ERR)
         return REDISMODULE_ERR;
 
+    // 注册 hellotype.range 命令对应的处理逻辑
     if (RedisModule_CreateCommand(ctx,"hellotype.range",
         HelloTypeRange_RedisCommand,"readonly",1,1,1) == REDISMODULE_ERR)
         return REDISMODULE_ERR;
 
+    // 注册 hellotype.len 命令对应的处理逻辑
     if (RedisModule_CreateCommand(ctx,"hellotype.len",
         HelloTypeLen_RedisCommand,"readonly",1,1,1) == REDISMODULE_ERR)
         return REDISMODULE_ERR;
