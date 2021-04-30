@@ -30,6 +30,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+// 包装器 #ifndef ，防止预处理器处理两次头文件的内容，产生错误
 #ifndef __SDS_H
 #define __SDS_H
 
@@ -39,10 +40,13 @@
 #include <stdarg.h>
 #include <stdint.h>
 
+// typedef 定义类型别名的用法
+// 在这个类型定义之后，标识符 *sds 可作为类型 char 的缩写
 typedef char *sds;
 
 /* Note: sdshdr5 is never used, we just access the flags byte directly.
  * However is here to document the layout of type 5 SDS strings. */
+// __attribute__ ((__packed__)) 关键字可以让 结构体 按照紧凑排列的方式占用内存，不进行字节对齐
 struct __attribute__ ((__packed__)) sdshdr5 {
     unsigned char flags; /* 3 lsb of type, and 5 msb of string length */
     char buf[];
@@ -79,10 +83,21 @@ struct __attribute__ ((__packed__)) sdshdr64 {
 #define SDS_TYPE_64 4
 #define SDS_TYPE_MASK 7
 #define SDS_TYPE_BITS 3
+
+// ## 是“标记粘贴运算符”
 #define SDS_HDR_VAR(T,s) struct sdshdr##T *sh = (void*)((s)-(sizeof(struct sdshdr##T)));
 #define SDS_HDR(T,s) ((struct sdshdr##T *)((s)-(sizeof(struct sdshdr##T))))
 #define SDS_TYPE_5_LEN(f) ((f)>>SDS_TYPE_BITS)
 
+/* static inline 定义静态内联函数
+ * inline 内联(在每一处被使用的源文件内部做定义)会避免执行时的跳转指令，执行速度更快，但是会多占用空间；
+ * 加上 static 关键字后，函数对于定义它的源文件以外的其他源文件都不可见（不会造成重复定义），
+ * 所以每个源文件都相当于自己源文件内定义的函数，所以不会出现不可调用的情况。
+ * 
+ * size_t 也就是 size type，sizeof运算符结果的类型
+ * size_t 在32位系统和64位系统分别代表了unsigned int 与unsigned long 类型
+ * 提高代码的可移植性、有效性或者可读性
+ *  */
 static inline size_t sdslen(const sds s) {
     unsigned char flags = s[-1];
     switch(flags&SDS_TYPE_MASK) {
