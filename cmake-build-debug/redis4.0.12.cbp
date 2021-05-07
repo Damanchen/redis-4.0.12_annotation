@@ -1,0 +1,977 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="redis4.0.12"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\deps\;CMake Files\deps\linenoise\;CMake Files\deps\lua\;CMake Files\deps\lua\src\;CMake Files\deps\hiredis\;CMake Files\src\;CMake Files\src\modules\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="redis-cli">
+				<Option output="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/src/redis-cli" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="src"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/linenoise"/>
+					<Add directory="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/hiredis"/>
+					<Add directory="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/Makefile&quot;  VERBOSE=1 redis-cli"/>
+					<CompileFile command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="redis-cli/fast">
+				<Option output="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/src/redis-cli" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="src"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/linenoise"/>
+					<Add directory="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/hiredis"/>
+					<Add directory="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/Makefile&quot;  VERBOSE=1 redis-cli/fast"/>
+					<CompileFile command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="redis-server">
+				<Option output="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/src/redis-server" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="src"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/linenoise"/>
+					<Add directory="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/hiredis"/>
+					<Add directory="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/Makefile&quot;  VERBOSE=1 redis-server"/>
+					<CompileFile command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="redis-server/fast">
+				<Option output="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/src/redis-server" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="src"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/linenoise"/>
+					<Add directory="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/hiredis"/>
+					<Add directory="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/Makefile&quot;  VERBOSE=1 redis-server/fast"/>
+					<CompileFile command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="linenoise">
+				<Option output="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/deps/linenoise/liblinenoise.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/deps/linenoise"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/deps/linenoise/Makefile&quot;  VERBOSE=1 linenoise"/>
+					<CompileFile command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/deps/linenoise/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/deps/linenoise/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/deps/linenoise/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="linenoise/fast">
+				<Option output="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/deps/linenoise/liblinenoise.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/deps/linenoise"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/deps/linenoise/Makefile&quot;  VERBOSE=1 linenoise/fast"/>
+					<CompileFile command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/deps/linenoise/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/deps/linenoise/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/deps/linenoise/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="lua">
+				<Option output="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/deps/lua/src/liblua.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/deps/lua/src"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/deps/lua/src/Makefile&quot;  VERBOSE=1 lua"/>
+					<CompileFile command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/deps/lua/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/deps/lua/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/deps/lua/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="lua/fast">
+				<Option output="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/deps/lua/src/liblua.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/deps/lua/src"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/deps/lua/src/Makefile&quot;  VERBOSE=1 lua/fast"/>
+					<CompileFile command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/deps/lua/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/deps/lua/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/deps/lua/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="hiredis">
+				<Option output="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/deps/hiredis/libhiredis.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/deps/hiredis"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/deps/hiredis/Makefile&quot;  VERBOSE=1 hiredis"/>
+					<CompileFile command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/deps/hiredis/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/deps/hiredis/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/deps/hiredis/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="hiredis/fast">
+				<Option output="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/deps/hiredis/libhiredis.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/deps/hiredis"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/deps/hiredis/Makefile&quot;  VERBOSE=1 hiredis/fast"/>
+					<CompileFile command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/deps/hiredis/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/deps/hiredis/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/deps/hiredis/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="testmodule">
+				<Option output="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/src/modules/testmodule.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/src/modules"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/src/modules/Makefile&quot;  VERBOSE=1 testmodule"/>
+					<CompileFile command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/src/modules/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/src/modules/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/src/modules/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="testmodule/fast">
+				<Option output="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/src/modules/testmodule.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/src/modules"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/src/modules/Makefile&quot;  VERBOSE=1 testmodule/fast"/>
+					<CompileFile command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/src/modules/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/src/modules/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/src/modules/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="helloblock">
+				<Option output="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/src/modules/helloblock.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/src/modules"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/src/modules/Makefile&quot;  VERBOSE=1 helloblock"/>
+					<CompileFile command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/src/modules/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/src/modules/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/src/modules/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="helloblock/fast">
+				<Option output="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/src/modules/helloblock.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/src/modules"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/src/modules/Makefile&quot;  VERBOSE=1 helloblock/fast"/>
+					<CompileFile command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/src/modules/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/src/modules/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/src/modules/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="hellotype">
+				<Option output="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/src/modules/hellotype.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/src/modules"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/src/modules/Makefile&quot;  VERBOSE=1 hellotype"/>
+					<CompileFile command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/src/modules/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/src/modules/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/src/modules/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="hellotype/fast">
+				<Option output="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/src/modules/hellotype.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/src/modules"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/src/modules/Makefile&quot;  VERBOSE=1 hellotype/fast"/>
+					<CompileFile command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/src/modules/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/src/modules/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/src/modules/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="helloworld">
+				<Option output="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/src/modules/helloworld.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/src/modules"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/src/modules/Makefile&quot;  VERBOSE=1 helloworld"/>
+					<CompileFile command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/src/modules/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/src/modules/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/src/modules/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="helloworld/fast">
+				<Option output="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/src/modules/helloworld.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/src/modules"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/src/modules/Makefile&quot;  VERBOSE=1 helloworld/fast"/>
+					<CompileFile command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/src/modules/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/src/modules/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/local/bin/gmake -j8 -f &quot;/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/cmake-build-debug/src/modules/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/hiredis/async.c">
+			<Option target="hiredis"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/hiredis/async.h">
+			<Option target="hiredis"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/hiredis/dict.c">
+			<Option target="hiredis"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/hiredis/dict.h">
+			<Option target="hiredis"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/hiredis/hiredis.c">
+			<Option target="hiredis"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/hiredis/hiredis.h">
+			<Option target="hiredis"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/hiredis/net.c">
+			<Option target="hiredis"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/hiredis/net.h">
+			<Option target="hiredis"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/hiredis/read.c">
+			<Option target="hiredis"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/hiredis/read.h">
+			<Option target="hiredis"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/hiredis/sds.c">
+			<Option target="hiredis"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/hiredis/sds.h">
+			<Option target="hiredis"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/linenoise/linenoise.c">
+			<Option target="linenoise"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/linenoise/linenoise.h">
+			<Option target="linenoise"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/fpconv.c">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/fpconv.h">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/lapi.c">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/lapi.h">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/lauxlib.c">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/lauxlib.h">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/lbaselib.c">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/lcode.c">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/lcode.h">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/ldblib.c">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/ldebug.c">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/ldebug.h">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/ldo.c">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/ldo.h">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/ldump.c">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/lfunc.c">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/lfunc.h">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/lgc.c">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/lgc.h">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/linit.c">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/liolib.c">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/llex.c">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/llex.h">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/lmathlib.c">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/lmem.c">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/lmem.h">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/loadlib.c">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/lobject.c">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/lobject.h">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/lopcodes.c">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/lopcodes.h">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/loslib.c">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/lparser.c">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/lparser.h">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/lstate.c">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/lstate.h">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/lstring.c">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/lstring.h">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/lstrlib.c">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/ltable.c">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/ltable.h">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/ltablib.c">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/ltm.c">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/ltm.h">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/lua_bit.c">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/lua_cjson.c">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/lua_cmsgpack.c">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/lua_struct.c">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/lundump.c">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/lundump.h">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/lvm.c">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/lvm.h">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/lzio.c">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/lzio.h">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/strbuf.c">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/strbuf.h">
+			<Option target="lua"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/adlist.c">
+			<Option target="redis-cli"/>
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/adlist.h">
+			<Option target="redis-cli"/>
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/ae.c">
+			<Option target="redis-cli"/>
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/ae.h">
+			<Option target="redis-cli"/>
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/anet.c">
+			<Option target="redis-cli"/>
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/anet.h">
+			<Option target="redis-cli"/>
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/aof.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/bio.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/bio.h">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/bitops.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/blocked.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/childinfo.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/cluster.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/cluster.h">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/config.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/config.h">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/crc16.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/crc64.c">
+			<Option target="redis-cli"/>
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/crc64.h">
+			<Option target="redis-cli"/>
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/db.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/debug.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/defrag.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/dict.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/dict.h">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/endianconv.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/endianconv.h">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/evict.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/expire.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/geo.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/geo.h">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/geohash.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/geohash.h">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/geohash_helper.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/geohash_helper.h">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/hyperloglog.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/intset.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/intset.h">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/latency.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/latency.h">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/lazyfree.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/lzf_c.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/lzf_d.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/memtest.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/module.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/modules/helloblock.c">
+			<Option target="helloblock"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/modules/hellotype.c">
+			<Option target="hellotype"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/modules/helloworld.c">
+			<Option target="helloworld"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/modules/testmodule.c">
+			<Option target="testmodule"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/multi.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/networking.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/notify.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/object.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/pqsort.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/pqsort.h">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/pubsub.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/quicklist.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/quicklist.h">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/rand.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/rand.h">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/rax.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/rax.h">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/rdb.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/rdb.h">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/redis-check-aof.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/redis-check-rdb.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/redis-cli.c">
+			<Option target="redis-cli"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/release.c">
+			<Option target="redis-cli"/>
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/release.h">
+			<Option target="redis-cli"/>
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/replication.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/rio.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/rio.h">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/scripting.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/sds.c">
+			<Option target="redis-cli"/>
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/sds.h">
+			<Option target="redis-cli"/>
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/sentinel.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/server.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/server.h">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/setproctitle.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/sha1.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/sha1.h">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/siphash.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/slowlog.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/slowlog.h">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/sort.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/sparkline.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/sparkline.h">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/syncio.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/t_hash.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/t_list.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/t_set.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/t_string.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/t_zset.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/util.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/util.h">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/ziplist.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/ziplist.h">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/zipmap.c">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/zipmap.h">
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/zmalloc.c">
+			<Option target="redis-cli"/>
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/zmalloc.h">
+			<Option target="redis-cli"/>
+			<Option target="redis-server"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\deps\"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/linenoise/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\deps\linenoise\"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\deps\lua\"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/lua/src/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\deps\lua\src\"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/deps/hiredis/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\deps\hiredis\"/>
+		</Unit>
+		<Unit filename="/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/modules/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\src\modules\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

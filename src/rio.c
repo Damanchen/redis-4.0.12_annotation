@@ -353,7 +353,8 @@ void rioGenericUpdateChecksum(rio *r, const void *buf, size_t len) {
  * 可以将写入的 I/O 压力分担到多次 fsync 调用中。
  */
 void rioSetAutoSync(rio *r, off_t bytes) {
-    redisAssert(r->read == rioFileIO.read);
+    serverAssert(r->read == rioFileIO.read);
+//    redisAssert(r->read == rioFileIO.read);
     r->io.file.autosync = bytes;
 }
 
