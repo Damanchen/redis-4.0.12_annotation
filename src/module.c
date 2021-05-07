@@ -3008,6 +3008,7 @@ moduleType *RM_CreateDataType(RedisModuleCtx *ctx, const char *name, int encver,
 
 /* If the key is open for writing, set the specified module type object
  * as the value of the key, deleting the old value if any.
+ * 如果键是开放的，设置指定的模块类型对象作为键的值，删除旧的值
  * On success REDISMODULE_OK is returned. If the key is not open for
  * writing or there is an active iterator, REDISMODULE_ERR is returned. */
 int RM_ModuleTypeSetValue(RedisModuleKey *key, moduleType *mt, void *value) {
