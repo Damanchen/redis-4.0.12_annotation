@@ -157,13 +157,18 @@ void psetexCommand(client *c) {
 int getGenericCommand(client *c) {
     robj *o;
 
+    // 尝试从数据库中取出键 c->argv[1] 对应的值对象
+    // 如果键不存在时，向客户端发送回复信息，并返回 NULL
     if ((o = lookupKeyReadOrReply(c,c->argv[1],shared.nullbulk)) == NULL)
         return C_OK;
 
+    // 值对象存在，检查它的类型
     if (o->type != OBJ_STRING) {
+        // 类型错误
         addReply(c,shared.wrongtypeerr);
         return C_ERR;
     } else {
+        // 类型正确，向客户端返回对象的值
         addReplyBulk(c,o);
         return C_OK;
     }
@@ -174,10 +179,19 @@ void getCommand(client *c) {
 }
 
 void getsetCommand(client *c) {
+    // 取出并返回键的值对象
     if (getGenericCommand(c) == C_ERR) return;
+
+    // 编码键的新值 c->argv[2]
     c->argv[2] = tryObjectEncoding(c->argv[2]);
+
+    // 将数据库中关联键 c->argv[1] 和新值对象 c->argv[2]
     setKey(c->db,c->argv[1],c->argv[2]);
+
+    // 发送事件通知
     notifyKeyspaceEvent(NOTIFY_STRING,"set",c->argv[1],c->db->id);
+
+    // dirty计数器+1
     server.dirty++;
 }
 

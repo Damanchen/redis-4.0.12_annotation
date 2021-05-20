@@ -901,7 +901,16 @@ const char *RM_StringPtrLen(const RedisModuleString *str, size_t *len) {
         if (len) *len = strlen(errmsg);
         return errmsg;
     }
+
+    // 调试
+    serverLog(LL_NOTICE, "chunk load argv[3] data: %s", "hello");
+
     if (len) *len = sdslen(str->ptr);
+
+    // 调试
+    serverLog(LL_NOTICE, "chunk load argv[3] data: %s", str);
+    serverLog(LL_NOTICE, "RM_StringPtrLen get len: %s, buf: %s", len, str->ptr);
+
     return str->ptr;
 }
 
@@ -3014,7 +3023,13 @@ moduleType *RM_CreateDataType(RedisModuleCtx *ctx, const char *name, int encver,
 int RM_ModuleTypeSetValue(RedisModuleKey *key, moduleType *mt, void *value) {
     if (!(key->mode & REDISMODULE_WRITE) || key->iter) return REDISMODULE_ERR;
     RM_DeleteKey(key);
+
+    // 根据对应的 mt, 生成一个 redisObject
     robj *o = createModuleObject(mt,value);
+
+    // 调试
+    serverLog(LL_NOTICE, "RM_ModuleTypeSetValue value: %s", value);
+
     setKey(key->db,key->key,o);
     decrRefCount(o);
     key->value = o;
@@ -3925,6 +3940,7 @@ void moduleInitModulesSystem(void) {
     modules = dictCreate(&modulesDictType,NULL);
 
     /* Set up the keyspace notification susbscriber list and static client */
+    // 设置键空间通知订阅者列表和静态客户
     moduleKeyspaceSubscribers = listCreate();
     moduleKeyspaceSubscribersClient = createClient(-1);
     moduleKeyspaceSubscribersClient->flags |= CLIENT_MODULE;
@@ -3937,12 +3953,16 @@ void moduleInitModulesSystem(void) {
         exit(1);
     }
     /* Make the pipe non blocking. This is just a best effort aware mechanism
-     * and we do not want to block not in the read nor in the write half. */
+     * and we do not want to block not in the read nor in the write half.
+     * 使管道不堵塞。这只是一种尽力的机制，我们不希望在读或写一半时阻塞。
+     * */
     anetNonBlock(NULL,server.module_blocked_pipe[0]);
     anetNonBlock(NULL,server.module_blocked_pipe[1]);
 
     /* Our thread-safe contexts GIL must start with already locked:
-     * it is just unlocked when it's safe. */
+     * it is just unlocked when it's safe.
+     * 我们的线程安全上下文GIL必须从已经锁定开始:当它是安全的时候它才被解锁
+     * */
     pthread_mutex_lock(&moduleGIL);
 }
 
@@ -4098,6 +4118,11 @@ int moduleUnload(sds name) {
 void moduleCommand(client *c) {
     char *subcmd = c->argv[1]->ptr;
 
+    // 调试：打印出正在执行的命令
+    char *order = c->argv[0]->ptr;
+    serverLog(LL_NOTICE, "%s process moduleCommand: %s", order, subcmd);
+
+    //执行 module load 操作，动态加载一个 module
     if (!strcasecmp(subcmd,"load") && c->argc >= 3) {
         robj **argv = NULL;
         int argc = 0;
@@ -4112,6 +4137,8 @@ void moduleCommand(client *c) {
         else
             addReplyError(c,
                 "Error loading the extension. Please check the server logs.");
+
+    // 执行 module unload 操作，卸载一个 module
     } else if (!strcasecmp(subcmd,"unload") && c->argc == 3) {
         if (moduleUnload(c->argv[2]->ptr) == C_OK)
             addReply(c,shared.ok);
@@ -4130,6 +4157,7 @@ void moduleCommand(client *c) {
             }
             addReplyErrorFormat(c,"Error unloading module: %s",errmsg);
         }
+    // 执行 module list 命令，列出现在已经加载好的 module
     } else if (!strcasecmp(subcmd,"list") && c->argc == 2) {
         dictIterator *di = dictGetIterator(modules);
         dictEntry *de;

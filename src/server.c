@@ -2067,10 +2067,12 @@ void redisOpArrayFree(redisOpArray *oa) {
 
 /* ====================== Commands lookup and execution ===================== */
 
+// 根据给定命令名字（SDS），查找命令
 struct redisCommand *lookupCommand(sds name) {
     return dictFetchValue(server.commands, name);
 }
 
+// 根据给定命令名字（C 字符串），查找命令
 struct redisCommand *lookupCommandByCString(char *s) {
     struct redisCommand *cmd;
     sds name = sdsnew(s);
@@ -2084,12 +2086,21 @@ struct redisCommand *lookupCommandByCString(char *s) {
  * the original table containing the original command names unaffected by
  * redis.conf rename-command statement.
  *
+ * 从当前命令表 server.commands 中查找给定名字，
+ * 如果没找到的话，就尝试从 server.orig_commands 中查找未被改名的原始名字
+ * 原始表中的命令名不受 redis.conf 中命令改名的影响
+ *
  * This is used by functions rewriting the argument vector such as
  * rewriteClientCommandVector() in order to set client->cmd pointer
- * correctly even if the command was renamed. */
+ * correctly even if the command was renamed.
+ *
+ * 这个函数可以在命令被更名之后，仍然在重写命令时得出正确的名字。
+ * */
 struct redisCommand *lookupCommandOrOriginal(sds name) {
+    // 查找当前表
     struct redisCommand *cmd = dictFetchValue(server.commands, name);
 
+    // 如果有需要的话，查找原始表
     if (!cmd) cmd = dictFetchValue(server.orig_commands,name);
     return cmd;
 }
@@ -2204,12 +2215,16 @@ void preventCommandReplication(client *c) {
  * preventCommandReplication(client *c);
  *
  */
+// 调用命令的实现函数，执行命令
 void call(client *c, int flags) {
+    // start 记录命令开始执行的时间
     long long dirty, start, duration;
+    // 记录命令开始执行前的 FLAG
     int client_old_flags = c->flags;
 
     /* Sent the command to clients in MONITOR mode, only if the commands are
      * not generated from reading an AOF. */
+    // 如果可以的话，将命令发送到 MONITOR
     if (listLength(server.monitors) &&
         !server.loading &&
         !(c->cmd->flags & (CMD_SKIP_MONITOR|CMD_ADMIN)))
@@ -2224,21 +2239,29 @@ void call(client *c, int flags) {
     redisOpArrayInit(&server.also_propagate);
 
     /* Call the command. */
+    // 保留旧 dirty 计数器值
     dirty = server.dirty;
+    // 计算命令开始执行的时间
     start = ustime();
+    // 执行实现函数
     c->cmd->proc(c);
+    // 计算命令执行耗费的时间
     duration = ustime()-start;
+    // 计算命令执行之后的 dirty 值
     dirty = server.dirty-dirty;
     if (dirty < 0) dirty = 0;
 
     /* When EVAL is called loading the AOF we don't want commands called
      * from Lua to go into the slowlog or to populate statistics. */
+    // 不将从 Lua 中发出的命令放入 SLOWLOG ，也不进行统计
     if (server.loading && c->flags & CLIENT_LUA)
         flags &= ~(CMD_CALL_SLOWLOG | CMD_CALL_STATS);
 
     /* If the caller is Lua, we want to force the EVAL caller to propagate
      * the script if the command flag or client flag are forcing the
      * propagation. */
+    // 如果调用者是 Lua ，那么根据命令 FLAG 和客户端 FLAG
+    // 打开传播（propagate)标志
     if (c->flags & CLIENT_LUA && server.lua_caller) {
         if (c->flags & CLIENT_FORCE_REPL)
             server.lua_caller->flags |= CLIENT_FORCE_REPL;
@@ -2248,12 +2271,14 @@ void call(client *c, int flags) {
 
     /* Log the command into the Slow log if needed, and populate the
      * per-command statistics that we show in INFO commandstats. */
+    // 如果有需要，将命令放到 SLOWLOG 里面
     if (flags & CMD_CALL_SLOWLOG && c->cmd->proc != execCommand) {
         char *latency_event = (c->cmd->flags & CMD_FAST) ?
                               "fast-command" : "command";
         latencyAddSampleIfNeeded(latency_event,duration/1000);
         slowlogPushEntryIfNeeded(c,c->argv,c->argc,duration);
     }
+    // 更新命令的统计信息
     if (flags & CMD_CALL_STATS) {
         c->lastcmd->microseconds += duration;
         c->lastcmd->calls++;
@@ -2326,14 +2351,29 @@ void call(client *c, int flags) {
  * processCommand() execute the command or prepare the
  * server for a bulk read from the client.
  *
+ * 这个函数执行时，我们已经读入了一个完整的命令到客户端，
+ * 这个函数负责执行这个命令，
+ * 或者服务器准备从客户端中进行一次读取。
+ *
  * If C_OK is returned the client is still alive and valid and
  * other operations can be performed by the caller. Otherwise
- * if C_ERR is returned the client was destroyed (i.e. after QUIT). */
+ * if C_ERR is returned the client was destroyed (i.e. after QUIT).
+ * 如果这个函数返回 1 ，那么表示客户端在执行命令之后仍然存在，
+ * 调用者可以继续执行其他操作。
+ * 否则，如果这个函数返回 0 ，那么表示客户端已经被销毁。
+ * */
 int processCommand(client *c) {
+
+    void *commandName = c->argv[0]->ptr;
+
+    // 调试：打印出正在执行的命令
+    serverLog(LL_NOTICE, "The server is now processing %s", commandName);
+
     /* The QUIT command is handled separately. Normal command procs will
      * go through checking for replication and QUIT will cause trouble
      * when FORCE_REPLICATION is enabled and would be implemented in
      * a regular command proc. */
+    // 特别处理 quit 命令
     if (!strcasecmp(c->argv[0]->ptr,"quit")) {
         addReply(c,shared.ok);
         c->flags |= CLIENT_CLOSE_AFTER_REPLY;
@@ -2342,7 +2382,9 @@ int processCommand(client *c) {
 
     /* Now lookup the command and check ASAP about trivial error conditions
      * such as wrong arity, bad command name and so forth. */
+    // 查找命令，并进行命令合法性检查，以及命令参数个数检查
     c->cmd = c->lastcmd = lookupCommand(c->argv[0]->ptr);
+    // 没找到指定的命令
     if (!c->cmd) {
         flagTransaction(c);
         sds args = sdsempty();
@@ -2353,6 +2395,8 @@ int processCommand(client *c) {
             (char*)c->argv[0]->ptr, args);
         sdsfree(args);
         return C_OK;
+
+    // 参数个数错误
     } else if ((c->cmd->arity > 0 && c->cmd->arity != c->argc) ||
                (c->argc < -c->cmd->arity)) {
         flagTransaction(c);
@@ -2362,6 +2406,7 @@ int processCommand(client *c) {
     }
 
     /* Check if the user is authenticated */
+    // 检查认证信息
     if (server.requirepass && !c->authenticated && c->cmd->proc != authCommand)
     {
         flagTransaction(c);
@@ -2372,7 +2417,13 @@ int processCommand(client *c) {
     /* If cluster is enabled perform the cluster redirection here.
      * However we don't perform the redirection if:
      * 1) The sender of this command is our master.
-     * 2) The command has no key arguments. */
+     * 2) The command has no key arguments.
+     *
+     * 如果开启了集群模式，那么在这里进行重定向操作。
+     * 不过，如果有以下情况出现，那么节点不进行重定向：
+     * 1）命令的发送者是本节点的主节点
+     * 2）命令没有 key 参数
+     * */
     if (server.cluster_enabled &&
         !(c->flags & CLIENT_MASTER) &&
         !(c->flags & CLIENT_LUA &&
@@ -2512,8 +2563,12 @@ int processCommand(client *c) {
         queueMultiCommand(c);
         addReply(c,shared.queued);
     } else {
+        // 开始执行命令
         call(c,CMD_CALL_FULL);
+
         c->woff = server.master_repl_offset;
+
+        // 处理那些解除了阻塞的键
         if (listLength(server.ready_keys))
             handleClientsBlockedOnLists();
     }
@@ -3748,7 +3803,11 @@ int main(int argc, char **argv) {
     getRandomHexChars(hashseed,sizeof(hashseed));
     dictSetHashFunctionSeed((uint8_t*)hashseed);
     server.sentinel_mode = checkForSentinelMode(argc,argv);
+
+    // 初始化配置
     initServerConfig();
+
+    // 初始化模块环境并注册api
     moduleInitModulesSystem();
 
     /* Store the executable path and arguments in a safe place in order
@@ -3836,6 +3895,8 @@ int main(int argc, char **argv) {
             exit(1);
         }
         resetServerSaveParams();
+
+        // 加载并解析配置文件
         loadServerConfig(configfile,options);
         sdsfree(options);
     }

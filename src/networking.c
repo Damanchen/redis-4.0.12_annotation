@@ -1327,14 +1327,21 @@ int processMultibulkBuffer(client *c) {
  * more query buffer to process, because we read more data from the socket
  * or because a client was blocked and later reactivated, so there could be
  * pending query buffer, already representing a full command, to process. */
+// 处理客户端输入的命令内容
 void processInputBuffer(client *c) {
     server.current_client = c;
     /* Keep processing while there is something in the input buffer */
+    // 尽可能地处理查询缓冲区中的内容
+    // 如果读取出现 short read ，那么可能会有内容滞留在读取缓冲区里面
+    // 这些滞留内容也许不能完整构成一个符合协议的命令，
+    // 需要等待下次读事件的就绪
     while(sdslen(c->querybuf)) {
         /* Return if clients are paused. */
+        // 如果客户端正处于暂停状态，那么直接返回
         if (!(c->flags & CLIENT_SLAVE) && clientsArePaused()) break;
 
         /* Immediately abort if the client is in the middle of something. */
+        // REDIS_BLOCKED 状态表示客户端正在被阻塞
         if (c->flags & CLIENT_BLOCKED) break;
 
         /* CLIENT_CLOSE_AFTER_REPLY closes the connection once the reply is
@@ -1342,17 +1349,26 @@ void processInputBuffer(client *c) {
          * this flag has been set (i.e. don't process more commands).
          *
          * The same applies for clients we want to terminate ASAP. */
+        // 客户端已经设置了关闭 FLAG ，没有必要处理命令了
         if (c->flags & (CLIENT_CLOSE_AFTER_REPLY|CLIENT_CLOSE_ASAP)) break;
 
         /* Determine request type when unknown. */
+        // 判断请求的类型
+        // 两种类型的区别可以在 Redis 的通讯协议上查到：
+        // http://redis.readthedocs.org/en/latest/topic/protocol.html
+        // 简单来说，多条查询是一般客户端发送来的，
+        // 而内联查询则是 TELNET 发送来的
         if (!c->reqtype) {
             if (c->querybuf[0] == '*') {
+                // 多条查询
                 c->reqtype = PROTO_REQ_MULTIBULK;
             } else {
+                // 内联查询
                 c->reqtype = PROTO_REQ_INLINE;
             }
         }
 
+        // 将缓冲区中的内容转换成命令，以及命令参数
         if (c->reqtype == PROTO_REQ_INLINE) {
             if (processInlineBuffer(c) != C_OK) break;
         } else if (c->reqtype == PROTO_REQ_MULTIBULK) {
@@ -1366,6 +1382,7 @@ void processInputBuffer(client *c) {
             resetClient(c);
         } else {
             /* Only reset the client when the command was executed. */
+            // 执行命令，并重置客户端
             if (processCommand(c) == C_OK) {
                 if (c->flags & CLIENT_MASTER && !(c->flags & CLIENT_MULTI)) {
                     /* Update the applied replication offset of our master. */

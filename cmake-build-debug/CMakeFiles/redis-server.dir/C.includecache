@@ -48,6 +48,8 @@ time.h
 sys/types.h
 -
 
+/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/cluster.h
+
 /Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/config.h
 AvailabilityMacros.h
 -
@@ -86,6 +88,16 @@ stdint.h
 
 /Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/latency.h
 
+/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/module.c
+server.h
+/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/server.h
+cluster.h
+/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/cluster.h
+dlfcn.h
+-
+redismodule.h
+/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/redismodule.h
+
 /Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/quicklist.h
 
 /Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/rax.h
@@ -100,25 +112,13 @@ rio.h
 server.h
 /Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/server.h
 
-/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/rio.c
-fmacros.h
-/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/fmacros.h
-string.h
+/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/redismodule.h
+sys/types.h
+-
+stdint.h
 -
 stdio.h
 -
-unistd.h
--
-rio.h
-/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/rio.h
-util.h
-/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/util.h
-crc64.h
-/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/crc64.h
-config.h
-/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/config.h
-server.h
-/Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/server.h
 
 /Users/cfq/Desktop/github/DamanChen/redis-4.0.12_annotation/src/rio.h
 stdio.h

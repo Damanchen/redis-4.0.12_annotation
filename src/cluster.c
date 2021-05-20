@@ -3227,7 +3227,8 @@ void clusterHandleManualFailover(void) {
  * CLUSTER cron job
  * -------------------------------------------------------------------------- */
 
-/* This is executed 10 times every second */
+/* This is executed 10 times every second
+ * 每秒执行10次的定时任务 */
 void clusterCron(void) {
     dictIterator *di;
     dictEntry *de;
@@ -3240,11 +3241,15 @@ void clusterCron(void) {
     static unsigned long long iteration = 0;
     mstime_t handshake_timeout;
 
+    // 记录这个方法调用的次数
     iteration++; /* Number of times this function was called so far. */
 
     /* We want to take myself->ip in sync with the cluster-announce-ip option.
      * The option can be set at runtime via CONFIG SET, so we periodically check
-     * if the option changed to reflect this into myself->ip. */
+     * if the option changed to reflect this into myself->ip.
+     * * *** 4 版本新特性 ***
+     * <新增关于实际ip 和 cluster-announce-ip 的同步功能>
+     *  */
     {
         static char *prev_ip = NULL;
         char *curr_ip = server.cluster_announce_ip;
@@ -3270,7 +3275,10 @@ void clusterCron(void) {
     /* The handshake timeout is the time after which a handshake node that was
      * not turned into a normal node is removed from the nodes. Usually it is
      * just the NODE_TIMEOUT value, but when NODE_TIMEOUT is too small we use
-     * the value of 1 second. */
+     * the value of 1 second.
+     * 做完 handshake 后没有继续通信变成正常的节点的 timeout 时间
+     * 通常为 cluster_node_timeout，但是如果Redis的这个参数设置的过小，就重新赋值为 1000 ms
+     *  */
     handshake_timeout = server.cluster_node_timeout;
     if (handshake_timeout < 1000) handshake_timeout = 1000;
 
@@ -3286,19 +3294,24 @@ void clusterCron(void) {
         clusterNode *node = dictGetVal(de);
 
         /* Not interested in reconnecting the link with myself or nodes
-         * for which we have no address. */
+         * for which we have no address.
+         * 忽略自己和没有地址的节点 */
         if (node->flags & (CLUSTER_NODE_MYSELF|CLUSTER_NODE_NOADDR)) continue;
 
+        // 遇到 pfail 的节点，stats_pfail_nodes++
         if (node->flags & CLUSTER_NODE_PFAIL)
             server.cluster->stats_pfail_nodes++;
 
         /* A Node in HANDSHAKE state has a limited lifespan equal to the
-         * configured node timeout. */
+         * configured node timeout.
+         *  */
         if (nodeInHandshake(node) && now - node->ctime > handshake_timeout) {
             clusterDelNode(node);
             continue;
         }
 
+        // clusterLink *link;          /* TCP/IP link with this node */
+        // 与某个节点的 TCP/IP link 不存在
         if (node->link == NULL) {
             int fd;
             mstime_t old_ping_sent;
@@ -3306,6 +3319,7 @@ void clusterCron(void) {
 
             fd = anetTcpNonBlockBindConnect(server.neterr, node->ip,
                 node->cport, NET_FIRST_BIND_ADDR);
+            // 拿不到集群的通信端口的文件描述符，说明集群通信端口不可用
             if (fd == -1) {
                 /* We got a synchronous error from connect before
                  * clusterSendPing() had a chance to be called.
@@ -3325,24 +3339,31 @@ void clusterCron(void) {
                     clusterReadHandler,link);
             /* Queue a PING in the new connection ASAP: this is crucial
              * to avoid false positives in failure detection.
-             *
+             * 尽快在新连接中排队:这对于避免故障检测中的误报是至关重要的
              * If the node is flagged as MEET, we send a MEET message instead
              * of a PING one, to force the receiver to add us in its node
-             * table. */
+             * table.
+             * 如果节点标记为MEET，则发送一个MEET消息而不是PING消息，
+             * 以强制接收方将我们添加到其节点表中 */
             old_ping_sent = node->ping_sent;
             clusterSendPing(link, node->flags & CLUSTER_NODE_MEET ?
                     CLUSTERMSG_TYPE_MEET : CLUSTERMSG_TYPE_PING);
             if (old_ping_sent) {
                 /* If there was an active ping before the link was
                  * disconnected, we want to restore the ping time, otherwise
-                 * replaced by the clusterSendPing() call. */
+                 * replaced by the clusterSendPing() call.
+                 * 如果在链接断开之前有一个存活的ping，我们希望恢复ping时间，
+                 * 否则用clusterSendPing()调用替换。 */
                 node->ping_sent = old_ping_sent;
             }
             /* We can clear the flag after the first packet is sent.
              * If we'll never receive a PONG, we'll never send new packets
              * to this node. Instead after the PONG is received and we
              * are no longer in meet/handshake status, we want to send
-             * normal PING packets. */
+             * normal PING packets.
+             * 我们可以在发送第一个数据包后清除该标志。
+             * 如果我们永远不会收到PONG，我们就永远不会向这个节点发送新的数据包。
+             * 相反，在收到PONG后，节点不再处于 meet/handshake 状态，准备发送正常的PING包。 */
             node->flags &= ~CLUSTER_NODE_MEET;
 
             serverLog(LL_DEBUG,"Connecting with Node %.40s at %s:%d",
@@ -3352,17 +3373,20 @@ void clusterCron(void) {
     dictReleaseIterator(di);
 
     /* Ping some random node 1 time every 10 iterations, so that we usually ping
-     * one random node every second. */
+     * one random node every second.
+     * 每10次迭代Ping一个随机节点，所以我们通常每秒Ping一个随机节点。 */
     if (!(iteration % 10)) {
         int j;
 
         /* Check a few random nodes and ping the one with the oldest
-         * pong_received time. */
+         * pong_received time.
+         * 检查一些随机节点，并 ping pong接收时间最长的节点。*/
         for (j = 0; j < 5; j++) {
             de = dictGetRandomKey(server.cluster->nodes);
             clusterNode *this = dictGetVal(de);
 
-            /* Don't ping nodes disconnected or with a ping currently active. */
+            /* Don't ping nodes disconnected or with a ping currently active.
+             * 跳过未连接的节点、处于handshake的节点、自己的节点 */
             if (this->link == NULL || this->ping_sent != 0) continue;
             if (this->flags & (CLUSTER_NODE_MYSELF|CLUSTER_NODE_HANDSHAKE))
                 continue;
